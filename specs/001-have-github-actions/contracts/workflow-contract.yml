@@ -1,0 +1,187 @@
+# GitHub Actions Workflow Contract
+# Feature: 001-have-github-actions
+# Date: 2025-10-06
+#
+# This file defines the structural contract for the CI/CD workflow.
+# It is NOT the actual implementation, but a specification of required elements.
+
+name: CI/CD Pipeline
+
+# TRIGGER CONTRACT
+on:
+  push:
+    branches:
+      - main
+
+# ENVIRONMENT CONTRACTS
+env:
+  NODE_VERSION: '22' # Minimum Node.js version
+
+# JOB CONTRACTS
+jobs:
+  # ========================================
+  # BUILD JOB CONTRACT
+  # ========================================
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # REQUIRED: Code checkout
+      - checkout-step
+
+      # REQUIRED: Node.js setup with caching
+      - setup-node-step:
+          node-version: $NODE_VERSION
+          cache: npm
+
+      # REQUIRED: Dependency installation
+      - install-dependencies:
+          command: npm ci
+
+      # REQUIRED: Build execution
+      - build-project:
+          command: make build
+
+      # CONDITIONAL: Artifact upload on failure
+      - upload-build-artifacts:
+          condition: on-failure
+          retention-days: 3
+
+    outputs:
+      # Build status available to dependent jobs
+      status: ${{ job.status }}
+
+  # ========================================
+  # UNIT TEST JOB CONTRACT
+  # ========================================
+  test-unit:
+    runs-on: ubuntu-latest
+    needs: build # REQUIRED: Sequential dependency
+
+    steps:
+      # REQUIRED: Code checkout
+      - checkout-step
+
+      # REQUIRED: Node.js setup with caching
+      - setup-node-step:
+          node-version: $NODE_VERSION
+          cache: npm
+
+      # REQUIRED: Dependency installation
+      - install-dependencies:
+          command: npm ci
+
+      # REQUIRED: Run tests
+      - run-unit-tests:
+          command: make ci.test
+
+    outputs:
+      # Test status available to summary
+      status: ${{ job.status }}
+
+  # ========================================
+  # E2E TEST JOB CONTRACT
+  # ========================================
+  test-e2e:
+    runs-on: ubuntu-latest
+    needs: build # REQUIRED: Sequential dependency (parallel with test-unit)
+
+    steps:
+      # REQUIRED: Code checkout
+      - checkout-step
+
+      # REQUIRED: Node.js setup with caching
+      - setup-node-step:
+          node-version: $NODE_VERSION
+          cache: npm
+
+      # REQUIRED: Dependency installation
+      - install-dependencies:
+          command: npm ci
+
+      # REQUIRED: Install Playwright browsers
+      - install-playwright-browsers:
+          command: npx playwright install chromium
+
+      # REQUIRED: Run E2E tests
+      - run-e2e-tests:
+          command: make test.e2e
+
+      # CONDITIONAL: Upload test reports on failure
+      - upload-e2e-reports:
+          condition: on-failure
+          retention-days: 3
+
+    outputs:
+      # Test status available to summary
+      status: ${{ job.status }}
+
+  # ========================================
+  # SUMMARY JOB CONTRACT
+  # ========================================
+  summary:
+    runs-on: ubuntu-latest
+    needs: [build, test-unit, test-e2e] # REQUIRED: Depends on all jobs
+    if: always() # REQUIRED: Runs even if dependencies fail
+
+    steps:
+      # REQUIRED: Generate workflow summary
+      - generate-summary:
+          format: github-actions-markdown
+          output: $GITHUB_STEP_SUMMARY
+          content:
+            - workflow-status: overall
+            - build-status: ${{ needs.build.result }}
+            - unit-test-status: ${{ needs.test-unit.result }}
+            - e2e-test-status: ${{ needs.test-e2e.result }}
+
+    outputs:
+      # Summary always succeeds
+      status: success
+# ========================================
+# ARTIFACT RETENTION CONTRACT
+# ========================================
+# All artifacts MUST have retention-days: 3
+
+# ========================================
+# JOB DEPENDENCY GRAPH
+# ========================================
+#
+#                  ┌─────────┐
+#                  │  Build  │
+#                  └────┬────┘
+#                       │
+#          ┌────────────┴────────────┐
+#          │                         │
+#     ┌────▼─────┐            ┌──────▼────┐
+#     │Unit Test │            │ E2E Test  │
+#     └────┬─────┘            └─────┬─────┘
+#          │                        │
+#          └────────┬───────────────┘
+#                   │
+#              ┌────▼────┐
+#              │ Summary │
+#              └─────────┘
+#
+# Notes:
+# - Unit Test and E2E Test run in PARALLEL after Build
+# - Summary runs AFTER all jobs (with if: always())
+
+# ========================================
+# CONFIGURATION REQUIREMENTS
+# ========================================
+# No additional configuration requirements
+
+# ========================================
+# VALIDATION CRITERIA
+# ========================================
+# 1. Workflow triggers ONLY on push to main branch
+# 2. All jobs use Node.js version 22 or higher
+# 3. All jobs use ubuntu-latest runner
+# 4. All jobs cache npm dependencies via setup-node action
+# 5. Build job MUST complete before test jobs start
+# 6. Test jobs MUST run in parallel
+# 7. Summary job MUST have if: always() condition
+# 8. All artifacts MUST have 3-day retention
+# 9. Workflow MUST fail if build or tests fail
+# 10. Summary MUST display status of all jobs
