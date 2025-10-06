@@ -11,6 +11,14 @@ export default [
   ...tseslint.configs.recommended,
   prettier,
   {
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module',
+      globals: globals.node,
+    },
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
