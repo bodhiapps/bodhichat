@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+  return <MemoryRouter initialEntries={['/bodhichat/']}>{children}</MemoryRouter>;
 };
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) => render(ui, { wrapper: AllTheProviders, ...options });
