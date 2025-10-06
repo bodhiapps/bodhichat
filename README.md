@@ -42,6 +42,7 @@ This will:
 
 - Install all npm dependencies with exact versions (`npm ci`)
 - Download and install Playwright Chromium browser
+- Configure git pre-commit hooks for automated code quality checks
 
 ### 3. Start Development Server
 
@@ -182,12 +183,15 @@ The production build will be output to the `dist/` directory.
 4. **Run tests**: `make test`
 5. **Build**: `make build`
 6. **Run E2E tests**: `make test.e2e`
+7. **Commit**: Git pre-commit hooks automatically run `make format` and `make lint` checks
 
 Or run the complete pipeline:
 
 ```bash
 make all
 ```
+
+**Note**: Pre-commit hooks are configured automatically by `make setup`. If format or lint checks fail during commit, run `make pre-commit` (or `make lint-fix`) to resolve all issues.
 
 ### Code Style
 

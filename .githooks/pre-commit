@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Running pre-commit checks...";
+echo "";
+
+echo "1. Checking code formatting...";
+if ! make format; then
+  echo "❌ Format check failed!";
+  echo "   Run 'make pre-commit' to fix all issues";
+  exit 1;
+fi
+echo "✅ Format check passed";
+echo "";
+
+echo "2. Checking linting...";
+if ! make lint; then
+  echo "❌ Lint check failed!";
+  echo "   Run 'make pre-commit' to fix all issues";
+  exit 1;
+fi
+echo "✅ Lint check passed";
+echo "";
+
+echo "✅ All pre-commit checks passed!";
+exit 0;

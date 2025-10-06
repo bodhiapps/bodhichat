@@ -129,8 +129,15 @@ The project follows the **test pyramid** philosophy:
 4. Run `make test` for component tests
 5. Run `make build` to verify build
 6. Run `make test.e2e` for E2E tests
+7. Commit changes (pre-commit hooks automatically run format and lint checks)
 
 Or simply: `make all` for the complete pipeline
+
+**Pre-Commit Hooks**: Git hooks are automatically configured by `make setup`. Before each commit, the hooks will:
+
+- Run `make format` to check formatting (blocks commit if formatting is incorrect)
+- Run `make lint` to check for linting violations (blocks commit if violations exist)
+- If checks fail: Run `make pre-commit` (or `make lint-fix`) to resolve all issues before committing
 
 ### Adding New ShadCN Components
 

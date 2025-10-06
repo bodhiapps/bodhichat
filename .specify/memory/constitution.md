@@ -2,14 +2,15 @@
 
 # SYNC IMPACT REPORT
 
-Version Change: 1.0.0 → 1.0.1 (Code Style Refinement)
+Version Change: 1.0.1 → 1.0.2 (Workflow Enhancement)
 Date: 2025-10-06
 
-Modified Principles:
+Modified Sections:
 
-- Principle IV (Code Quality & Type Safety):
-  - Semicolons: None → Required (Prettier enforced)
-  - Line width: 100 characters → 160 characters
+- Development Workflow → Quality Gates Pipeline:
+  - Added automated pre-commit hooks enforcement
+  - `make setup` now configures git hooks automatically
+  - Commits blocked if format or lint checks fail
 
 Added Sections: None
 Removed Sections: None
@@ -21,18 +22,22 @@ Templates Requiring Updates:
 ✅ agent-file-template.md - No changes needed
 
 Documentation Updates:
-✅ .prettierrc - Updated semi and printWidth settings
-✅ README.md - Updated code style section
-✅ CLAUDE.md - Updated code style section
+✅ .githooks/pre-commit - Created pre-commit hook script
+✅ Makefile - Updated setup target to configure git hooks
+✅ README.md - Updated with git hooks information
+✅ CLAUDE.md - Updated workflow with pre-commit hooks
 
-Follow-up TODOs:
-
-- Run `make format-fix` to reformat all code with new settings
+Follow-up TODOs: None
 
 Rationale:
-PATCH version bump (1.0.1) for code style refinement. Enabling semicolons
-and increasing line width to 160 characters improves code consistency and
-reduces line wrapping. No governance or principle changes.
+PATCH version bump (1.0.2) for workflow enhancement. Adding automated
+pre-commit hooks enforces existing code quality principles (Principle IV)
+by blocking commits that fail format or lint checks. Improves development
+workflow without changing governance or adding new principles.
+
+Previous Amendment (1.0.1 - 2025-10-06):
+Code style refinement. Enabling semicolons and increasing line width to
+160 characters improves code consistency and reduces line wrapping.
 
 Previous Amendment (1.0.0 - 2025-10-06):
 Initial constitution establishing foundational principles for Bodhi Chat
@@ -197,7 +202,7 @@ make all  # Runs: setup → format → lint → build → test → test.e2e
 
 **Individual gates:**
 
-1. **Setup**: `make setup` - Install dependencies (npm ci) + Playwright browsers
+1. **Setup**: `make setup` - Install dependencies (npm ci) + Playwright browsers + Configure git hooks
 2. **Format**: `make format-fix` - Auto-format code with Prettier
 3. **Lint**: `make lint-fix` - Fix ESLint violations automatically
 4. **Build**: `make build` - TypeScript compilation + Vite production build
@@ -205,6 +210,18 @@ make all  # Runs: setup → format → lint → build → test → test.e2e
 6. **E2E**: `make test.e2e` - Run Playwright end-to-end tests
 
 **All gates MUST pass before code review.**
+
+**Automated Pre-Commit Enforcement:**
+
+Git pre-commit hooks are automatically configured by `make setup` and enforce quality gates before commits:
+
+- **Format Check**: Runs `make format` - blocks commit if formatting is incorrect
+- **Lint Check**: Runs `make lint` - blocks commit if linting violations exist
+- **Fix Command**: If checks fail, run `make pre-commit` to resolve all issues
+
+Commits that fail format or lint checks are automatically blocked to maintain code quality.
+
+**Note**: The `make pre-commit` target is an alias for `make lint-fix`, which runs both format and lint fixes in the correct order.
 
 ### Test-Driven Workflow
 
@@ -324,4 +341,4 @@ npx shadcn@latest add [component-name]
 - Consult `README.md` for setup and quick start guidance
 - Review component-specific documentation in source files
 
-**Version**: 1.0.1 | **Ratified**: 2025-10-06 | **Last Amended**: 2025-10-06
+**Version**: 1.0.2 | **Ratified**: 2025-10-06 | **Last Amended**: 2025-10-06

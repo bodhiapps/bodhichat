@@ -1,4 +1,4 @@
-.PHONY: all setup install clean build test ci.test test.e2e lint lint-fix format format-fix validate help
+.PHONY: all setup install clean build test ci.test test.e2e lint lint-fix format format-fix pre-commit validate help
 
 .DEFAULT_GOAL := help
 
@@ -11,6 +11,9 @@ setup: ## Install dependencies with exact versions (using npm ci)
 	@echo "Installing Playwright browsers..."
 	npx playwright install chromium
 	@echo "Playwright browsers installed successfully"
+	@echo "Configuring git hooks..."
+	git config core.hooksPath .githooks
+	@echo "Git hooks configured successfully"
 
 install: ## Install dependencies (using npm install)
 	@echo "Installing dependencies..."
@@ -58,6 +61,9 @@ format-fix: ## Format code with Prettier
 	@echo "Formatting code..."
 	npm run format
 	@echo "Code formatting completed"
+
+pre-commit: ## Fix all pre-commit issues (format + lint)
+	@$(MAKE) lint-fix
 
 validate: ## Run validation (lint)
 	@echo "Validating..."
