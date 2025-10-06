@@ -76,8 +76,8 @@ npm run test:e2e -- --grep "homepage loads"
 The project uses `@` alias for imports (configured in `vite.config.ts`, `vitest.config.ts`, and `components.json`):
 
 ```typescript
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 ```
 
 ### Testing Architecture
@@ -109,8 +109,8 @@ The project follows the **test pyramid** philosophy:
 
 - **Indentation**: 2 spaces
 - **Quotes**: Single quotes
-- **Semicolons**: None (enforced by Prettier)
-- **Line Width**: 100 characters
+- **Semicolons**: Required (enforced by Prettier)
+- **Line Width**: 160 characters
 - **TypeScript**: Strict mode enabled
 - **Arrow Functions**: No parentheses for single params (`avoid` setting)
 

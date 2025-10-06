@@ -193,8 +193,8 @@ make all
 
 - **Indentation**: 2 spaces
 - **Quotes**: Single quotes
-- **Semicolons**: No semicolons
-- **Line width**: 100 characters
+- **Semicolons**: Required
+- **Line width**: 160 characters
 - **TypeScript**: Strict mode enabled
 
 ## License

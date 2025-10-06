@@ -1,13 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export function About() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="space-y-2">
         <h1 className="text-4xl font-bold">About Bodhi Chat</h1>
-        <p className="text-lg text-muted-foreground">
-          A showcase application for the Bodhi Platform
-        </p>
+        <p className="text-lg text-muted-foreground">A showcase application for the Bodhi Platform</p>
       </div>
 
       <Card>
@@ -16,8 +14,8 @@ export function About() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p>
-            Bodhi Chat is a ChatGPT-like chat interface powered by the Bodhi Platform, demonstrating
-            how to build modern web applications that integrate with local AI services.
+            Bodhi Chat is a ChatGPT-like chat interface powered by the Bodhi Platform, demonstrating how to build modern web applications that integrate with
+            local AI services.
           </p>
 
           <div className="space-y-2">
@@ -46,5 +44,5 @@ export function About() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { Link, Outlet } from 'react-router-dom'
-import { Button } from './ui/button'
+import { Link, Outlet } from 'react-router-dom';
+import { Button } from './ui/button';
 
 export function Layout() {
   return (
@@ -23,10 +23,8 @@ export function Layout() {
         <Outlet />
       </main>
       <footer className="border-t py-4">
-        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          © 2025 Bodhi Chat. Powered by Bodhi Platform.
-        </div>
+        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">© 2025 Bodhi Chat. Powered by Bodhi Platform.</div>
       </footer>
     </div>
-  )
+  );
 }

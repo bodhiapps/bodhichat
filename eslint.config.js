@@ -1,9 +1,9 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import prettier from 'eslint-config-prettier'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+import prettier from 'eslint-config-prettier';
 
 export default [
   { ignores: ['dist', 'e2e', 'playwright-report', 'test-results', '*.config.js'] },
@@ -52,4 +52,4 @@ export default [
       'react-refresh/only-export-components': 'off',
     },
   },
-]
+];

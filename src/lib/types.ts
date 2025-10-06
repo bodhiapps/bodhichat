@@ -1,2 +1,2 @@
 // Application-wide TypeScript types
-export type {}
+export type {};

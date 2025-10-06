@@ -72,12 +72,12 @@ mkdir -p ai-logs/001-bootstrap
 2. **vite.config.ts**:
 
 ```typescript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-})
+});
 ```
 
 3. **tsconfig.json**:
@@ -142,11 +142,11 @@ export default defineConfig({
 6. **eslint.config.js**:
 
 ```javascript
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -166,7 +166,7 @@ export default tseslint.config(
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   }
-)
+);
 ```
 
 7. **index.html**:
@@ -306,9 +306,9 @@ npm install -D @types/node
 1. **Update vite.config.ts** - Add path alias:
 
 ```typescript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
@@ -317,7 +317,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-})
+});
 ```
 
 2. **Create tailwind.config.js**:
@@ -377,7 +377,7 @@ export default {
       },
     },
   },
-}
+};
 ```
 
 3. **Create postcss.config.js**:
@@ -388,7 +388,7 @@ export default {
     tailwindcss: {},
     autoprefixer: {},
   },
-}
+};
 ```
 
 4. **Replace src/index.css**:
@@ -577,9 +577,9 @@ npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom @te
 1. **Create vitest.config.ts**:
 
 ```typescript
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
@@ -592,21 +592,15 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
-    exclude: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/e2e/**',
-      '**/playwright-report/**',
-      '**/test-results/**',
-    ],
+    exclude: ['**/node_modules/**', '**/dist/**', '**/e2e/**', '**/playwright-report/**', '**/test-results/**'],
   },
-})
+});
 ```
 
 2. **Create src/test/setup.ts**:
 
 ```typescript
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 ```
 
 3. **Create src/test/test-utils.tsx**:
@@ -683,7 +677,7 @@ npx playwright install chromium
 1. **Create playwright.config.ts**:
 
 ```typescript
-import { defineConfig, devices } from '@playwright/test'
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './e2e',
@@ -707,7 +701,7 @@ export default defineConfig({
     url: 'http://localhost:5173',
     reuseExistingServer: !process.env.CI,
   },
-})
+});
 ```
 
 **Note**: Using `reporter: 'list'` provides clean terminal output without opening a browser window with HTML report.
@@ -715,13 +709,13 @@ export default defineConfig({
 2. **Create e2e/example.spec.ts**:
 
 ```typescript
-import { test, expect } from '@playwright/test'
+import { test, expect } from '@playwright/test';
 
 test('homepage loads', async ({ page }) => {
-  await page.goto('/')
-  await expect(page).toHaveTitle(/Bodhi Chat/)
-  await expect(page.getByTestId('app-title')).toBeVisible()
-})
+  await page.goto('/');
+  await expect(page).toHaveTitle(/Bodhi Chat/);
+  await expect(page.getByTestId('app-title')).toBeVisible();
+});
 ```
 
 **Note**: Using `getByTestId` for reliable element selection following best practices for integration tests.
@@ -754,12 +748,12 @@ npm install -D prettier eslint-config-prettier
 **2. Update eslint.config.js** (migrated from deprecated `tseslint.config()` to flat array):
 
 ```javascript
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import prettier from 'eslint-config-prettier'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+import prettier from 'eslint-config-prettier';
 
 export default [
   { ignores: ['dist', 'e2e', 'playwright-report', 'test-results', '*.config.js'] },
@@ -808,7 +802,7 @@ export default [
       'react-refresh/only-export-components': 'off',
     },
   },
-]
+];
 ```
 
 **Note**:
@@ -905,7 +899,7 @@ mkdir -p src/components src/pages src/hooks
 
 ```typescript
 // Application-wide TypeScript types
-export type {}
+export type {};
 ```
 
 **Verification**:

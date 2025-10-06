@@ -77,10 +77,10 @@ npm install tailwindcss@next @tailwindcss/vite@next
 1. **Update vite.config.ts** - Add Tailwind plugin and @ path alias:
 
 ```typescript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
@@ -89,7 +89,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-})
+});
 ```
 
 2. **Create tailwind.config.js** - ShadCN-compatible theme with CSS variables:
@@ -149,7 +149,7 @@ export default {
       },
     },
   },
-}
+};
 ```
 
 3. **Create postcss.config.js**:
@@ -160,7 +160,7 @@ export default {
     tailwindcss: {},
     autoprefixer: {},
   },
-}
+};
 ```
 
 4. **Update src/index.css** - Add Tailwind directives and ShadCN theme CSS variables:
@@ -358,9 +358,9 @@ cat package.json | grep -E '(vitest|jsdom|@testing-library)'
 1. **Create vitest.config.ts**:
 
 ```typescript
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
@@ -374,13 +374,13 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
   },
-})
+});
 ```
 
 2. **Create src/test/setup.ts**:
 
 ```typescript
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 ```
 
 3. **Create src/test/test-utils.tsx**:
@@ -471,12 +471,12 @@ npx playwright install
 **Create Sample E2E Test** (e.g., tests/example.spec.ts or e2e/example.spec.ts):
 
 ```typescript
-import { test, expect } from '@playwright/test'
+import { test, expect } from '@playwright/test';
 
 test('homepage loads', async ({ page }) => {
-  await page.goto('http://localhost:5173')
-  await expect(page).toHaveTitle(/Vite/)
-})
+  await page.goto('http://localhost:5173');
+  await expect(page).toHaveTitle(/Vite/);
+});
 ```
 
 **Verification**:
@@ -549,12 +549,12 @@ npx playwright test --reporter=list
 3. **Create eslint.config.js** - Flat config with TypeScript and React:
 
 ```javascript
-import eslint from '@eslint/js'
-import tseslint from '@typescript-eslint/eslint-plugin'
-import tsParser from '@typescript-eslint/parser'
-import reactHooksPlugin from 'eslint-plugin-react-hooks'
-import reactRefreshPlugin from 'eslint-plugin-react-refresh'
-import globals from 'globals'
+import eslint from '@eslint/js';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import reactRefreshPlugin from 'eslint-plugin-react-refresh';
+import globals from 'globals';
 
 export default [
   {
@@ -591,13 +591,7 @@ export default [
     },
   },
   {
-    files: [
-      '**/*.test.ts',
-      '**/*.test.tsx',
-      '**/test/**/*.ts',
-      'vitest.config.ts',
-      'vite.config.ts',
-    ],
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/test/**/*.ts', 'vitest.config.ts', 'vite.config.ts'],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -615,7 +609,7 @@ export default [
       },
     },
   },
-]
+];
 ```
 
 4. **Install ESLint dependencies**:
@@ -667,7 +661,7 @@ mkdir -p src/hooks
 
 ```typescript
 // Application-wide TypeScript types
-export type {}
+export type {};
 ```
 
 **Verification**:

@@ -2,32 +2,42 @@
 
 # SYNC IMPACT REPORT
 
-Version Change: 0.0.0 → 1.0.0 (New Constitution)
+Version Change: 1.0.0 → 1.0.1 (Code Style Refinement)
 Date: 2025-10-06
 
-Modified Principles: N/A (new constitution)
-Added Sections:
+Modified Principles:
 
-- Core Principles (7 principles)
-- Technology Stack
-- Development Workflow
-- Governance
+- Principle IV (Code Quality & Type Safety):
+  - Semicolons: None → Required (Prettier enforced)
+  - Line width: 100 characters → 160 characters
 
-Removed Sections: N/A (new constitution)
+Added Sections: None
+Removed Sections: None
 
 Templates Requiring Updates:
-✅ plan-template.md - Constitution Check section aligned with TDD gates
-✅ spec-template.md - Testability requirements aligned
-✅ tasks-template.md - TDD ordering (tests before implementation) aligned
+✅ plan-template.md - No changes needed
+✅ spec-template.md - No changes needed
+✅ tasks-template.md - No changes needed
 ✅ agent-file-template.md - No changes needed
 
-Follow-up TODOs: None
+Documentation Updates:
+✅ .prettierrc - Updated semi and printWidth settings
+✅ README.md - Updated code style section
+✅ CLAUDE.md - Updated code style section
+
+Follow-up TODOs:
+
+- Run `make format-fix` to reformat all code with new settings
 
 Rationale:
-This is the initial constitution establishing the foundational principles
-for Bodhi Chat development. Principles extracted from README.md and
-CLAUDE.md emphasize TDD, test pyramid philosophy, code quality, and
-spec-driven development.
+PATCH version bump (1.0.1) for code style refinement. Enabling semicolons
+and increasing line width to 160 characters improves code consistency and
+reduces line wrapping. No governance or principle changes.
+
+Previous Amendment (1.0.0 - 2025-10-06):
+Initial constitution establishing foundational principles for Bodhi Chat
+development. Principles extracted from README.md and CLAUDE.md emphasize
+TDD, test pyramid philosophy, code quality, and spec-driven development.
 ==============================================================================
 -->
 
@@ -90,8 +100,8 @@ spec-driven development.
 - **Style Consistency**:
   - Indentation: 2 spaces
   - Quotes: Single quotes
-  - Semicolons: None (Prettier enforced)
-  - Line width: 100 characters
+  - Semicolons: Required (Prettier enforced)
+  - Line width: 160 characters
   - Arrow functions: No parentheses for single parameters
 
 **Rationale**: Automated quality enforcement reduces cognitive load, prevents bugs, ensures consistency across the codebase, and enables safe refactoring.
@@ -314,4 +324,4 @@ npx shadcn@latest add [component-name]
 - Consult `README.md` for setup and quick start guidance
 - Review component-specific documentation in source files
 
-**Version**: 1.0.0 | **Ratified**: 2025-10-06 | **Last Amended**: 2025-10-06
+**Version**: 1.0.1 | **Ratified**: 2025-10-06 | **Last Amended**: 2025-10-06
