@@ -1,0 +1,27 @@
+# Build outputs
+dist
+dist-ssr
+coverage
+.nyc_output
+
+# Dependencies
+node_modules
+
+# Test outputs
+playwright-report
+test-results
+
+# Generated files
+*.min.js
+*.min.css
+
+# Package lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Logs
+*.log
+
+# ShadCN scaffolded components
+src/components/ui/
