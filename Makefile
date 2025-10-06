@@ -1,8 +1,8 @@
-.PHONY: all setup install clean build test ci.test test.e2e lint lint-fix format format-fix pre-commit validate release.pages help
+.PHONY: all setup install clean build test ci.test test.e2e ci.test.e2e lint lint-fix format format-fix pre-commit validate release.pages help
 
 .DEFAULT_GOAL := help
 
-all: setup format lint build ci.test test.e2e ## Build and test everything including E2E tests
+all: setup format lint build ci.test ci.test.e2e ## Build and test everything including E2E tests
 
 setup: ## Install dependencies with exact versions (using npm ci)
 	@echo "Installing dependencies..."
@@ -39,6 +39,10 @@ ci.test: ## Run tests in CI mode
 
 test.e2e: ## Run Playwright E2E tests
 	npm run test:e2e
+	@echo "E2E tests completed successfully"
+
+ci.test.e2e: ## Run Playwright E2E tests in CI mode (headless)
+	npm run test:e2e:ci
 	@echo "E2E tests completed successfully"
 
 lint: ## Run ESLint checks

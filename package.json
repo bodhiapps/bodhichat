@@ -15,7 +15,8 @@
     "test:ci": "vitest run",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test --headed",
+    "test:e2e:ci": "playwright test"
   },
   "dependencies": {
     "@radix-ui/react-scroll-area": "^1.2.10",

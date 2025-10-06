@@ -33,10 +33,23 @@ This quickstart guide validates the GitHub Pages deployment workflow from end to
      export GH_PAT=gh_pat_XXXXXXXXXXXXXXXXXXXX
      ```
 
-3. **Repository Setup**:
-   - Ensure you have write access to `bodhiapps/bodhichat`
-   - Ensure GitHub Pages is enabled in repository settings
-   - Pages source: GitHub Actions
+3. **Repository Setup - Enable GitHub Pages**:
+
+   a. **Enable GitHub Pages with GitHub Actions source**:
+   - Go to: `https://github.com/bodhiapps/bodhichat/settings/pages`
+   - Under "Build and deployment":
+     - Source: Select **"GitHub Actions"**
+   - Click **Save**
+
+   b. **Configure environment to allow tag deployments**:
+   - Go to: `https://github.com/bodhiapps/bodhichat/settings/environments`
+   - Click on **github-pages** environment (created automatically after first step)
+   - Under "Deployment branches and tags":
+     - Select **"No restriction"**
+   - This allows the workflow to deploy from tags (default branch-only protection blocks tag deployments)
+
+   c. **Verify permissions**:
+   - Ensure you have write access to the repository
 
 ### Clone and Setup
 
